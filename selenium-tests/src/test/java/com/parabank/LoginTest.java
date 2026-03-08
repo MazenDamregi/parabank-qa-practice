@@ -8,17 +8,21 @@ import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+import org.openqa.selenium.chrome.ChromeOptions;
 
 public class LoginTest {
 
     WebDriver driver; // create the driver instance variable
 
-    @BeforeClass
-    public void setup() {
-        // Selenium 4 manages ChromeDriver automatically - no setup needed
-        driver = new ChromeDriver(); // assign a browser
-        driver.manage().window().maximize(); // maximize the browser window
-    }
+@BeforeClass
+public void setup() {
+    ChromeOptions options = new ChromeOptions();
+    options.addArguments("--headless");
+    options.addArguments("--no-sandbox");
+    options.addArguments("--disable-dev-shm-usage");
+    driver = new ChromeDriver(options);
+    driver.manage().window().maximize();
+}
 
     @Test
     public void validLoginTest() {
