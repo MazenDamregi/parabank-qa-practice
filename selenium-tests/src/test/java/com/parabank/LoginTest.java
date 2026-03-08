@@ -9,6 +9,9 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import java.time.Duration;
 
 public class LoginTest {
 
@@ -39,6 +42,10 @@ public void setup() {
         password.sendKeys("demo");
         loginBtn.click();
 
+        // Wait up to 10 seconds for title to contain "Accounts"
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.titleContains("Accounts"));
+
         // Verify we landed on the account page
         Assert.assertTrue(driver.getTitle().contains("Accounts"), 
             "Login failed - not on accounts page");
@@ -56,6 +63,7 @@ public void setup() {
         password.sendKeys("wrongpass");
         loginBtn.click();
 
+        
         // Verify error message appears
         WebElement error = driver.findElement(By.className("error"));
         Assert.assertTrue(error.isDisplayed(), 
