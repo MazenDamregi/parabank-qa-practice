@@ -11,19 +11,19 @@ import org.testng.annotations.Test;
 
 public class LoginTest {
 
-    WebDriver driver;
+    WebDriver driver; // create the driver instance variable
 
     @BeforeClass
     public void setup() {
         // Selenium 4 manages ChromeDriver automatically - no setup needed
-        driver = new ChromeDriver();
-        driver.manage().window().maximize();
+        driver = new ChromeDriver(); // assign a browser
+        driver.manage().window().maximize(); // maximize the browser window
     }
 
     @Test
     public void validLoginTest() {
         // Go to parabank
-        driver.get("https://parabank.parasoft.com/parabank/index.htm");
+        driver.get("https://parabank.parasoft.com/parabank/index.htm"); // naviagte to the login page
 
         // Find username and password fields and login button
         WebElement username = driver.findElement(By.name("username"));
